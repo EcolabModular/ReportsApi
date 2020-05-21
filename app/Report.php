@@ -14,6 +14,10 @@ class Report extends Model
     const REPORTE_CANCELADO = 'cancelado';
     const REPORTE_ATENDIDO = 'atendido';
 
+    const REPORTE_PREVENTIVO = 1;
+    const REPORTE_CORRECTIVO = 2;
+    const REPORTE_PREDICTIVO = 3;
+
     /**
      * The attributes that are mass assignable.
      *

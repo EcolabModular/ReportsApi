@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Report;
 use App\ReportField;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
@@ -55,7 +56,7 @@ class ReportFieldController extends BaseController
             'title' => 'max:255',
             'description' => 'max:255',
             'isEnabled' => 'required|integer|between:0,1',
-            'reportType_id' => 'required|integer|between:1,3',
+            'reportType_id' => 'required|in:' . Report::REPORTE_PREVENTIVO . ',' . Report::REPORTE_CORRECTIVO . ',' . Report::REPORTE_PREDICTIVO,
         ];
 
         $this->validate($request, $rules);
@@ -87,7 +88,7 @@ class ReportFieldController extends BaseController
             'title' => 'max:255',
             'description' => 'max:255',
             'isEnabled' => 'integer|between:0,1',
-            'reportType_id' => 'required|integer|between:1,3',
+            'reportType_id' => 'required|in:' . Report::REPORTE_PREVENTIVO . ',' . Report::REPORTE_CORRECTIVO . ',' . Report::REPORTE_PREDICTIVO,
         ];
 
         $this->validate($request, $rules);
@@ -97,7 +98,7 @@ class ReportFieldController extends BaseController
         $ReportField->fill($request->all());
 
         if ($ReportField->isClean()) {
-            return $this->errorResponse('Al menos un valor debe ser distinto', Response::HTTP_UNPROCESSABLE_ENTITY);
+            return $this->errorResponse('At least one value must change', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $ReportField->save();

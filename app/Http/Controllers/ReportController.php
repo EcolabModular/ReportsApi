@@ -42,7 +42,7 @@ class ReportController extends Controller
             'name' => 'required|max:255',
             'description' => 'required|max:255',
             'status' => 'required|in:' . Report::REPORTE_URGENTE . ',' . Report::REPORTE_REGULAR,
-            'reportType_id' => 'required|integer|between:1,3',
+            'reportType_id' => 'required|in:' . Report::REPORTE_PREVENTIVO . ',' . Report::REPORTE_CORRECTIVO . ',' . Report::REPORTE_PREDICTIVO,
         ];
 
         $this->validate($request, $rules);
@@ -73,7 +73,7 @@ class ReportController extends Controller
             'name' => 'max:255',
             'description' => 'max:255',
             'status' => 'required|in:' . Report::REPORTE_CANCELADO . ',' . Report::REPORTE_REGULAR . ',' . Report::REPORTE_URGENTE . ',' . Report::REPORTE_ARCHIVADO . ',' . Report::REPORTE_ATENDIDO,
-            'reportType_id' => 'required|integer|between:1,3',
+            'reportType_id' => 'required|in:' . Report::REPORTE_PREVENTIVO . ',' . Report::REPORTE_CORRECTIVO . ',' . Report::REPORTE_PREDICTIVO,
         ];
 
         $this->validate($request, $rules);
@@ -100,7 +100,7 @@ class ReportController extends Controller
 
 
         if ($Report->isClean()) {
-            return $this->errorResponse('Al menos un valor debe ser distinto', Response::HTTP_UNPROCESSABLE_ENTITY);
+            return $this->errorResponse('At least one value must change', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $Report->save();

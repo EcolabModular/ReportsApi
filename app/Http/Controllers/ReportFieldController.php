@@ -31,7 +31,7 @@ class ReportFieldController extends BaseController
     {
         $reportfields = ReportField::all();
 
-        return $this->successResponse($reportfields);
+        return $this->showAll($reportfields);
     }
 
     /**
@@ -42,7 +42,7 @@ class ReportFieldController extends BaseController
         $reportfields = ReportField::where([
             ['reportType_id',$reportType],
             ['isEnabled','1']])->get();
-        return $this->successResponse($reportfields);
+        return $this->showAll($reportfields);
     }
 
     /**

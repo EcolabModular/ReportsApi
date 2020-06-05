@@ -29,7 +29,9 @@ class ReportController extends Controller
     {
         $reports = Report::all();
 
-        return $this->successResponse($reports);
+        return $this->showAll($reports);
+
+        //return $this->successResponse($reports);
     }
 
     /**

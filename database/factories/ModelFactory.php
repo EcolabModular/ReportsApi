@@ -18,7 +18,7 @@ $factory->define(App\Report::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->sentence(1,true),
         'description' => $faker->paragraph(1),
-        'status' => $faker->randomElement([Report::REPORTE_URGENTE, Report::REPORTE_REGULAR, Report::REPORTE_ARCHIVADO, Report::REPORTE_ATENDIDO, Report::REPORTE_CANCELADO]),
+        'status' => $faker->randomElement([Report::REPORTE_URGENTE, Report::REPORTE_REGULAR]),
         'reportType_id' =>  $faker->numberBetween(1,3), // PREVENTIVO, CORRECTIVO, PREDICTIVO
     ];
 });

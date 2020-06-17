@@ -70,12 +70,19 @@ trait ApiResponser
 
 	protected function filterData(Collection $collection)
 	{
-		foreach (app()->request->query() as $query => $value)
+		$fillable = $collection[0]->getFillable();
+
+        foreach (app()->request->query() as $query => $value)
 		{
-			if(isset($query, $value)){
-				$collection = $collection->where($query, $value);
-			}
-		}
+            if(in_array($query,$fillable) || $query == 'id'){
+                if(isset($query, $value)){
+                    //$collection = $collection->where($query, $value);
+                    $collection = $collection->reject(function($element) use ($query,$value) {
+                        return mb_strpos($element[$query],$value) === false;
+                    });
+                }
+            }
+        }
 		return $collection;
 	}
 
@@ -83,7 +90,7 @@ trait ApiResponser
 	{
 
 		$reglas = [
-			'per_page' => 'integer|min:2|max:15'
+			'per_page' => 'integer|min:2|max:1000'
 		];
 
 		Validator::validate(app()->request->all(), $reglas);

@@ -30,8 +30,6 @@ class ReportController extends Controller
         $reports = Report::all();
 
         return $this->showAll($reports);
-
-        //return $this->successResponse($reports);
     }
 
     /**
@@ -42,7 +40,7 @@ class ReportController extends Controller
     {
         $rules = [
             'name' => 'required|max:255',
-            'description' => 'required|max:255',
+            'description' => 'required|max:1000',
             'status' => 'required|in:' . Report::REPORTE_URGENTE . ',' . Report::REPORTE_REGULAR,
             'reportType_id' => 'required|in:' . Report::REPORTE_PREVENTIVO . ',' . Report::REPORTE_CORRECTIVO . ',' . Report::REPORTE_PREDICTIVO,
         ];
@@ -73,7 +71,7 @@ class ReportController extends Controller
     {
         $rules = [
             'name' => 'max:255',
-            'description' => 'max:255',
+            'description' => 'max:1000',
             'status' => 'required|in:' . Report::REPORTE_CANCELADO . ',' . Report::REPORTE_REGULAR . ',' . Report::REPORTE_URGENTE . ',' . Report::REPORTE_ARCHIVADO . ',' . Report::REPORTE_ATENDIDO,
             'reportType_id' => 'required|in:' . Report::REPORTE_PREVENTIVO . ',' . Report::REPORTE_CORRECTIVO . ',' . Report::REPORTE_PREDICTIVO,
         ];

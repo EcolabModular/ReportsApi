@@ -16,7 +16,7 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('description');
+            $table->string('description',1000);
             $table->string('status');
             $table->integer('reportType_id'); //Dictionary foreign Key
             $table->timestamps();

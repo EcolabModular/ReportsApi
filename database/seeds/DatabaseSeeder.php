@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(Report::class, 50)->create();
-        factory(ReportField::class, 80)->create();
+        factory(Report::class, 100)->create();
+        factory(ReportField::class, 50)->create();
     }
 }
